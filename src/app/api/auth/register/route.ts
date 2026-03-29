@@ -17,7 +17,8 @@ export async function POST(request: Request) {
       data: { email, password: hashed, name: name || null },
     })
     return NextResponse.json({ id: user.id, email: user.email }, { status: 201 })
-  } catch {
+  } catch (err) {
+    console.error('Registration error:', err)
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 })
   }
 }

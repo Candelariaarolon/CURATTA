@@ -6,16 +6,16 @@ export function analyzeImage(imageBuffer: Buffer, filename: string): ImageAnalys
   const patterns = ['solid', 'striped', 'floral', 'geometric', 'plaid', 'polka dots', 'animal print']
   const colors = ['black', 'white', 'navy', 'beige', 'red', 'blush', 'emerald', 'camel', 'gray', 'mustard']
 
-  const hash = (imageBuffer.length + filename.length) % 7
+  const seed = (imageBuffer.length + filename.length) % 7
   
   return {
     colors: [
-      colors[hash % colors.length],
-      colors[(hash + 2) % colors.length],
-      colors[(hash + 4) % colors.length],
+      colors[seed % colors.length],
+      colors[(seed + 2) % colors.length],
+      colors[(seed + 4) % colors.length],
     ],
-    styles: [styles[hash % styles.length], styles[(hash + 3) % styles.length]],
-    garments: [garments[hash % garments.length], garments[(hash + 2) % garments.length]],
-    patterns: [patterns[hash % patterns.length]],
+    styles: [styles[seed % styles.length], styles[(seed + 3) % styles.length]],
+    garments: [garments[seed % garments.length], garments[(seed + 2) % garments.length]],
+    patterns: [patterns[seed % patterns.length]],
   }
 }
